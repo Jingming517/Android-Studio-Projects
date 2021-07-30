@@ -1,0 +1,2 @@
+rootProject.name = "ListView and Spinner"
+include ':app'
