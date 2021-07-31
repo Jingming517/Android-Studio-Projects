@@ -3,10 +3,10 @@ Practice Projects for Android Development for Beginners
 [Tutorial Link](https://www.youtube.com/watch?v=fis26HvvDII&t=25022s&ab_channel=freeCodeCamp.org)
 
 * [Ex1 Registration App](#ex1_registration_app)  
-### Ex2 UI Basics  
-### Ex3 Layouts  
-### Ex4 Images  
-### Ex5 ListView and Spinner  
+* [Ex2 UI Basics](#ex2_ui_basics)   
+* [Ex3 Layouts](#ex3_layouts)  
+* [Ex4 Images](#ex4_images)  
+* [Ex5 ListView and Spinner](#ex5_listview_and_spinner)  
 
 ### Ex1 Registration App  
 ```java
