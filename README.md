@@ -155,7 +155,153 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 ```
 ### Ex3 Layouts  
+```xml
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstRelLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/txtName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:id="@+id/txtLastName"
+            android:layout_toRightOf="@+id/txtName"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:id="@+id/txtEmail"
+            android:layout_toRightOf="@+id/txtLastName"
+            android:layout_marginLeft="10dp"/>
+
+
+    </RelativeLayout>
+```
 ### Ex4 Images  
+```xml
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="159dp"
+        android:src="@mipmap/minecraft_icon"
+        android:id="@+id/myImage"
+        android:layout_centerInParent="true"/>
+```
+```xml
+        android:icon="@mipmap/minecraft_icon"
+```
 ### Ex5 ListView and Spinner  
+```xml
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/studentsSpinner"
+        android:entries="@array/students"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:id="@+id/citiesList"
+        android:layout_below="@+id/studentsSpinner"/>
+```
+```java
+package com.example.listviewandspinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ListView citiesList;
+    private Spinner studentsSpinner;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        citiesList = findViewById(R.id.citiesList);
+        studentsSpinner = findViewById(R.id.studentsSpinner);
+
+        // Spinner
+
+//        ArrayList<String> students = new ArrayList<>();
+//        students.add("Meisam");
+//        students.add("Brad");
+//        students.add("Sarah");
+//        students.add("Madeline");
+//        students.add("Tom");
+//
+//        ArrayAdapter<String> studentsAdapter = new ArrayAdapter<>(
+//                this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                students
+//        );
+//        studentsSpinner.setAdapter(studentsAdapter);
+
+        studentsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(MainActivity.this, students.get(position) + " Selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,
+                        studentsSpinner.getSelectedItem().toString() + " Selected",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        // ListView
+        ArrayList<String> cities = new ArrayList<>();
+        cities.add("Zurich");
+        cities.add("New York");
+        cities.add("Berlin");
+        cities.add("Moscow");
+        cities.add("Madrid");
+
+        // adapter: to fetch data from arraylist to listview
+        ArrayAdapter<String> citiesAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                cities
+        );
+
+        citiesList.setAdapter(citiesAdapter);
+
+        citiesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, cities.get(position) + " Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+```
 ###
 ###
