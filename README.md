@@ -7,6 +7,7 @@ Practice Projects for Android Development for Beginners
 * [Ex3 Layouts](#ex3-layouts)  
 * [Ex4 Images](#ex4-images)  
 * [Ex5 ListView and Spinner](#ex5-listview-and-spinner)  
+* [Ex6 Different XML Files](#ex6-different-xml-files)
 
 ### Ex1 Registration App  
 ```java
@@ -303,5 +304,69 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
-###
+### Ex6 Different XML Files
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Settings"
+        android:id="@+id/settings_menu"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Alarm"
+        android:id="@+id/alarm_menu"
+        android:icon="@drawable/ic_alarm"
+        app:showAsAction="ifRoom"/>
+
+</menu>
+```
+```java
+package com.example.differentxmlfiles;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView txtHello;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_menu:
+                Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.alarm_menu:
+                Toast.makeText(this, "Alarm Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
+```
+
 ###
