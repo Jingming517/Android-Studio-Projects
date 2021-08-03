@@ -8,6 +8,7 @@ Practice Projects for Android Development for Beginners
 * [Ex4 Images](#ex4-images)  
 * [Ex5 ListView and Spinner](#ex5-listview-and-spinner)  
 * [Ex6 Different XML Files](#ex6-different-xml-files)
+* [Ex7 Material Design](#ex7-material-design) 
 
 ### Ex1 Registration App  
 ```java
@@ -369,4 +370,83 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-###
+### Ex7 Material Design
+https://material.io/
+
+build.gradle(app)
+```xml
+  dependencies {
+    // ...
+    implementation 'com.google.android.material:material:<version>'
+    // ...
+  }
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Say Hello"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/orange"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/purple_200"
+        app:backgroundTint="#03A9F4"
+        app:rippleColor="@color/design_default_color_secondary"
+        android:id="@+id/fab"/>
+    
+</RelativeLayout>
+```
+```java
+package com.example.materialdesign;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    private FloatingActionButton fab;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Fab Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+```
+
+
+
+
+
+
