@@ -9,6 +9,7 @@ Practice Projects for Android Development for Beginners
 * [Ex5 ListView and Spinner](#ex5-listview-and-spinner)  
 * [Ex6 Different XML Files](#ex6-different-xml-files)
 * [Ex7 Material Design](#ex7-material-design) 
+* [Ex8 Snackbar and CardView](#ex8-snackbar-and-cardview)
 
 ### Ex1 Registration App  
 ```java
@@ -445,8 +446,131 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
+### Ex8 Snackbar and CardView 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/parent">
 
 
+    <Button
+        android:id="@+id/btnShowSnackbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Snackbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowSnackbar"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Hello"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/txtHello"/>
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtHello"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+```java
+package com.example.snackbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ConstraintLayout parent;
+    private Button btnShowSnackbar;
+    private MaterialCardView cardView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        parent = findViewById(R.id.parent);
+        btnShowSnackbar = findViewById(R.id.btnShowSnackbar);
+        cardView = findViewById(R.id.cardView);
+
+        // Snackbar
+        btnShowSnackbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSnackbar();
+            }
+        });
+
+        // CardView
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Card Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showSnackbar() {
+        Snackbar.make(parent, "This is a Snackbar", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, "Retry Click", Toast.LENGTH_SHORT).show();
+                    }
+                })
+//                .setActionTextColor(getColor(R.color.purple_700))
+//                .setActionTextColor(getResources().getColor(R.color.purple_700))
+                .setActionTextColor(Color.RED)      //Color of "Retry"
+                .setTextColor(Color.YELLOW)     //Color of "This is a Snackbar"
+                .show();
+    }
+}
+```
 
 
 
